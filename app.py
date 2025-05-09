@@ -16,7 +16,7 @@ with st.form("risk_form"):
     neutro = st.number_input("Палочкоядерные нейтрофилы (%)", min_value=0.0, step=0.1)
     hr = st.number_input("Частота сердечных сокращений (ЧСС)", min_value=0, step=1)
     wbc = st.number_input("Лейкоциты (10⁹/л)", min_value=0.0, step=0.1)
-        temp = st.number_input("Температура тела (°C)", min_value=34.0, max_value=42.0, step=0.1)
+    temp = st.number_input("Температура тела (°C)", min_value=34.0, max_value=42.0, step=0.1)
     crp = st.number_input("С-реактивный белок (СРБ, мг/л)", min_value=0.0, step=0.1)
     submitted = st.form_submit_button("Рассчитать риск")
 

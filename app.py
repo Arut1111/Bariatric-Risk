@@ -22,7 +22,8 @@ with st.form("risk_form"):
 if submitted:
     r = -2.86
     r += -0.053 * hb
-    r += 1.687 * vas
+    if vas > 4:
+        r += 1.687
     r += 3.146 * int(drain)
     r += 0.167 * neutro
     if hr > 100:

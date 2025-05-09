@@ -1,4 +1,3 @@
-
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,7 +6,7 @@ st.set_page_config(page_title="Оценка риска осложнений", pa
 st.title("⚠️ Прогностическая модель риска послеоперационных осложнений")
 
 st.markdown("""Введите параметры пациента для оценки риска осложнений после бариатрической операции.
-Модель учитывает верифицированные клинические признаки и визуализирует расчёт вероятности осложнений.""")
+Модель использует логистическую регрессию на основе клинических факторов риска.""")
 
 with st.form("risk_form"):
     hb = st.number_input("Гемоглобин (г/л)", min_value=0.0, step=0.1)
@@ -16,8 +15,8 @@ with st.form("risk_form"):
     neutro = st.number_input("Палочкоядерные нейтрофилы (%)", min_value=0.0, step=0.1)
     hr = st.number_input("Частота сердечных сокращений (ЧСС)", min_value=0, step=1)
     wbc = st.number_input("Лейкоциты (10⁹/л)", min_value=0.0, step=0.1)
-    temp = st.number_input("Температура тела (°C)", min_value=34.0, max_value=42.0, step=0.1)
     crp = st.number_input("С-реактивный белок (СРБ, мг/л)", min_value=0.0, step=0.1)
+    temp = st.number_input("Температура тела (°C)", min_value=34.0, max_value=42.0, step=0.1)
     submitted = st.form_submit_button("Рассчитать риск")
 
 if submitted:
@@ -25,7 +24,8 @@ if submitted:
     r += -0.053 * hb
     if vas > 4:
         r += 1.687
-    r += 3.146 * int(drain)
+    if drain:
+        r += 3.146
     r += 0.167 * neutro
     if hr > 100:
         r += 0.05
